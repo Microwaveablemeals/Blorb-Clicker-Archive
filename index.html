@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+    <head>
+        <title>Blorb Clicker</title>
+    </head>
+
+    <body>
+        <p>Score: <span id="score">0</span></p>
+        <p>Reaction: <span id="reaction">0</span>/100 ///// <span>TIP: when you do a reaction, it will "UNDERCLOCK", which will mean you need to charge your reaction back from a negative to reaction again. I reccomend saving a reaction, since you can upgrade your reactions overtime. It is also a great starter way to get great money, but usually only use it one time as a beginner source of score, as it is not worth it when you get underclocked to continue.</span></p>
+        <img src="blorb.png" height="200" width="200" onclick="addToScore(1)">
+        <img src="Timebomb.png" height="50" width="60" onclick="addToReaction(1)">
+        <h1>Members</h1>
+        <button onclick="buyInsert()">Insert [<span id="insertcost">15</span>] Amount you have: <span id="inserts">0</span></button>
+        <button onclick="buyRab()">Rab [<span id="rabcost">50</span>] Amount you have: <span id="rabs">0</span></button>
+        <button onclick="buySalty()">SaltyRedFish [<span id="saltyredfishcost">500</span>] Amount you have: <span id="saltyredfishs">0</span></button>
+        <button onclick="buyVed()">Ved [<span id="vedcost">5000</span>] Amount you have: <span id="veds">0</span></button>
+
+        <h2>Mouse Upgrades</h2>
+        <button onclick="buySlashOfTix()">Slash Of Tix [<span id="slashoftixcost">2500</span>] Amount you have: <span id="slashoftixs">0</span></button>
+        
+        <h3>SHOPKEEPER'S SPECIAL IMBUES</h3>
+        <button onclick="buyFirebrandImbue()">Firebrand [<span id="firebrandcost">10000</span>] Amount you have: <span id="firebrands">0</span></button>
+    </body>
+
+
+    <script>
+        var score = 0;
+
+        var insertCost = 15;
+        var inserts = 0;
+
+        var rabCost = 50;
+        var rabs = 0;
+
+        var saltyCost = 500;
+        var saltys = 0;
+
+        var vedCost = 5000;
+        var veds = 0;
+
+        var slashOfTixCost = 2500;
+        var slashOfTixs = 0;
+
+        var reaction = 0;
+        var reactionMax = 100;
+
+        var firebrands = 0;
+        var firebrandCost = 10000;
+
+        function buyInsert() {
+            if (score >= insertCost) {
+                if (score >= insertCost) {
+                    score -= insertCost;
+                    inserts++;
+                    insertCost = Math.round(insertCost * 1.5);
+
+                    document.getElementById("insertcost").innerHTML = insertCost;
+                    document.getElementById("inserts").innerHTML = inserts;
+                    document.getElementById("score").innerHTML = score;
+                }
+            }
+        }
+
+        function buyFirebrandImbue() {
+            if (score >= firebrandCost) {
+                score -= firebrandCost;
+                firebrands++;
+                firebrandCost = Math.round(firebrandCost * 1.5);
+
+                document.getElementById("firebrandcost").innerHTML = firebrandCost;
+                document.getElementById("firebrands").innerHTML = firebrands;
+                document.getElementById("score").innerHTML = score;
+            }
+        }
+
+        function buyRab() {
+            if (score >= rabCost) {
+                score -= rabCost;
+                rabs++;
+                rabCost = Math.round(rabCost * 1.5);
+
+                document.getElementById("rabcost").innerHTML = rabCost;
+                document.getElementById("rabs").innerHTML = rabs;
+                document.getElementById("score").innerHTML = score;
+            }
+        }
+
+        function buySalty() {
+            if (score >= saltyCost) {
+                score -= saltyCost;
+                saltys++;
+                saltyCost = Math.round(saltyCost * 1.5);
+
+                document.getElementById("saltyredfishcost").innerHTML = saltyCost;
+                document.getElementById("saltyredfishs").innerHTML = saltys;
+                document.getElementById("score").innerHTML = score;
+            }
+        }
+
+        function buyVed() {
+            if (score >= vedCost) {
+                score -= vedCost;
+                veds++;
+                vedCost = Math.round(vedCost * 1.5);
+
+                document.getElementById("vedcost").innerHTML = vedCost;
+                document.getElementById("veds").innerHTML = veds;
+                document.getElementById("score").innerHTML = score;
+            }
+        }
+
+        function buySlashOfTix() {
+            if (score >= slashOfTixCost) {
+                score -= slashOfTixCost;
+                slashOfTixs++;
+                slashOfTixCost = Math.round(slashOfTixCost * 1.5);
+
+                document.getElementById("slashoftixcost").innerHTML = slashOfTixCost;
+                document.getElementById("slashoftixs").innerHTML = slashOfTixs;
+                document.getElementById("score").innerHTML = score;
+            }
+        }
+
+        function addToScore(amount) {
+            score += amount * slashOfTixs + 1;
+            document.getElementById("score").innerHTML = score;
+        }
+
+        function addToReaction(amount) {
+            reaction += amount * firebrands + 1;
+            if (reaction >= reactionMax) {
+                score += 1000;
+                reaction = -1000;
+                document.getElementById("score").innerHTML = score;
+            }
+            document.getElementById("reaction").innerHTML = reaction;
+        }
+
+        setInterval(function() {
+            score = score + inserts;
+            score = score + (rabs * 5);
+            score = score + (saltys * 50);
+            score = score + (veds * 500);
+
+            document.getElementById("score").innerHTML = score;
+        }, 1000); // for future me: 1000 = 1000ms = 1s
+    </script>
